@@ -206,13 +206,21 @@ public class JobService
 			Optional<JobPost> post = jobPostRepo.findById(postId);
 			if (applicant.isPresent() && post.isPresent())
 			{
-				post.get()
-				    .getApplicants()
-				    .add(applicant.get());
+				List<AppUsers> users = post.get().getApplicants();
 				
-				applicant.get()
-				    .getPosts()
-				    .add(post.get());
+				if (users.contains(applicant.get()))
+				  throw new Error("User Already Applied for this post");
+				else
+				  post.get().getApplicants()
+				      .add(applicant.get());
+				
+				List<JobPost> posts = applicant.get().getPosts();
+				
+				if (posts.contains(post.get()))
+				  throw new Error("Applicant Already Applied for this post");
+				else
+				  post.get().getApplicants()
+				      .add(applicant.get());
 				
 				jobPostRepo.save(post.get());
 				appUsersRepo.save(applicant.get());
