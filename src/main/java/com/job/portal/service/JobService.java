@@ -211,8 +211,8 @@ public class JobService
 				if (users.contains(applicant.get()))
 				  throw new Error("User Already Applied for this post");
 				else
-				  post.get().getApplicants()
-				      .add(applicant.get());
+				  applicant.get().getPosts()
+				      .add(post.get());
 				
 				List<JobPost> posts = applicant.get().getPosts();
 				

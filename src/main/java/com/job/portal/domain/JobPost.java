@@ -8,8 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import lombok.AllArgsConstructor;
@@ -43,6 +43,6 @@ public class JobPost
 	@ManyToOne
 	private AppUsers recuiter;
 	
-	@OneToMany
+	@ManyToMany
 	private List<AppUsers> applicants;
 }
